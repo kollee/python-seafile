@@ -88,6 +88,15 @@ class Repo(object):
     def restore(self, commit_id):
         pass
 
+    def transfer(self, new_owner):
+        """Transfer ownership from the current owner to new_owner."""
+        uri = f"/api2/repos/{self.id}/owner"
+        putdata = {
+            'owner': new_owner
+        }
+        self.client.put(uri, data=putdata)
+
+
 class RepoRevision(object):
     def __init__(self, client, repo, commit_id):
         self.client = client
